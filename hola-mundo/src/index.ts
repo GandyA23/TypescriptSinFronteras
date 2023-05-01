@@ -187,3 +187,113 @@ const product: Audit & Product = {
 }
 
 // Literal type
+// Le indicas a la variable cuáles son los valores que puedes asignar, pueden ser uno o varios.
+
+// Para el siguiente ejemplo, no es posible asignar números diferentes a 0, 1, 2, 3, 5
+
+// Manera 1:
+const nDeFibo1: 0 | 1 | 2 | 3 | 5 = 3
+
+// Manera 2
+type Fibo = 0 | 1 | 2 | 3 | 5
+const nDeFibo2: Fibo = 5
+
+// Nullable types
+// Con el union type, es posible recibir núlos, pero tendran que ser verificados con sentencias de control para saber que hacer cuando lleguen esos tipos de datos. 
+function toNumber(s: string | null | undefined) 
+{
+    if (!s)
+        return 0
+    return parseInt(s)
+}
+
+const n = toNumber(null)
+
+// Optional chain operator
+
+function getUser(id: number)
+{
+    if (id < 0)
+        return null 
+
+    return {
+        id: 1,
+        name: 'Gandy Esaú',
+        created_at: new Date()
+    }
+}
+
+const user = getUser(-1)
+
+// Con el signo de interrogación, realiza la pregunta si el valor de user realmente es un objeto, entonces no genera una excepción, devuelve un valor undefined. 
+console.log(user?.created_at)
+
+// También es posible hacerlo con arreglos
+const arr1 = null 
+arr1?.[0]
+
+// Y con funciones
+const fn1: any = null
+fn1?.()
+
+
+// Nullish coalescing operator
+// Con la operación ?? también considera los strings vaciós y los 0
+
+const difficulty: number | null = null
+const user2 = {
+    username: 'Gandy Esaú Ávila Estrada',
+    difficulty: difficulty ?? 1 // Si es null o undefined, toma el valor de 1, si es '' o 0, entonces toma '' o 0
+}
+
+console.log(user2)
+
+
+// Type assertion 
+// Existen algunos atributos que ts no sabe que tipo de dato son, entonces gracias al type assertion, será posible decirle que tipo de dato es un valor
+// El uso de type assertion puede ser peligroso, entonces solo hay que estar 100% seguro de que ese valor es un tipo de dato 
+
+// Ejemplo básico
+const elem: any = null
+const elem1 = elem as number 
+
+// Ejemplo real
+const input1 = document?.getElementById('username') as HTMLInputElement
+
+console.log(input1?.value)
+
+// Otra forma de hacer type assertion es 
+const input2 = <HTMLInputElement> document?.getElementById('password')
+
+
+// Type narrowing
+// Gracias al union type, es posible tener una variable con dos posibles valores, entonces, gracias al type narrowing podemos llevar a la variable a un camino en específico. 
+
+function lala(x: string | number) {
+    //type narrowing
+    if (typeof x == 'number')
+    {
+        // llevalo por un camino donde puede hacer operaciones con number
+    }
+
+    if (typeof x == 'string')
+    {
+        // llevalo por un camino donde puede hacer operaciones con string
+    }
+}
+
+
+// Type unknown
+// Con el tipo de dato unknown, nos va a obligar a manejar los posibles caminos que pueda tener dependiendo el tipo de dato
+// Es una mejora del tipo any
+function procesa(algo: unknown)
+{
+
+    if (typeof algo == 'string')
+        return algo.toUpperCase()
+
+    if (typeof algo == 'number')
+        return algo.toString()
+
+    return ''
+}
