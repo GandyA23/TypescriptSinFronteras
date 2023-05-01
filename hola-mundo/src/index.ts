@@ -335,3 +335,107 @@ function procesa(algo: unknown)
 
     return ''
 }
+
+
+/**
+ * * Clases
+ */
+class Personaje {
+
+    /*
+    // Atributos
+    
+    // Manera 1
+    // Propiedad de lectura
+    readonly id: number
+    name: string
+    level: number
+
+    // Propiedad privada
+    private _hp: number
+
+    */
+
+    // Propiedad opcional
+    profession?: string
+
+    // Propiedad estática
+    private static team: number = 1
+
+    // También es posible declarar los atributos en el constructor
+    constructor(
+        public readonly id: number,
+        public name: string,
+        public level: number,
+        private _hp: number
+    ) 
+    {
+        /*
+        // Si se declaran los atributos en el contructor, ya no es necesario asignar el valor
+        this.id = id
+        this.name = name
+        this.level = level
+        this._hp = _hp
+        */
+    }
+
+    // Métodos
+    levelUp(): number 
+    {
+        this.level++
+        return this.level
+    }
+
+    changeHp(hp: number): number 
+    {
+        this._hp += hp 
+        // no pasarse del máximo
+        return this._hp
+    }
+
+    // Método estático
+    static addCharacter(): void 
+    {
+        Personaje.team++
+    }
+
+    static getTeam(): number 
+    {
+        return Personaje.team
+    }
+
+
+    // getters and setters
+    get hp(): number 
+    {
+        return this._hp
+    }
+
+    set hp(hp: number)
+    {
+        this._hp += hp
+    }
+
+    get team(): number
+    {
+        return Personaje.team
+    }
+}
+
+const personaje = new Personaje(1, 'GandyA23', 1, 100)
+const personaje1 = new Personaje(2, 'Chanchito', 1, 120)
+
+Personaje.addCharacter()
+
+personaje.levelUp()
+personaje.changeHp(-10)
+
+console.log(personaje, personaje1)
+console.log(personaje1.team, personaje.team, Personaje.getTeam())
+
+
+// Type narrowing en clases
+if (personaje instanceof Personaje)
+{
+    personaje.hp
+}
