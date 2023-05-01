@@ -1,4 +1,6 @@
-/** **/
+/**
+ * * Introducción 
+ */
 // console.log("Hola Mundo")
 
 let mensaje : string = "Hola Mundo"
@@ -7,10 +9,11 @@ let mensaje : string = "Hola Mundo"
 mensaje = "chanchito feliz"
 mensaje = "chao mundo"
 console.log(mensaje)
-
 console.log(typeof [])
+
+
 /**
- * Tipos de datos en JS
+ * * Tipos de datos en JS
  * number
  * string
  * boolean
@@ -45,13 +48,19 @@ let nums2: Array<number> = []
 animales.map(x => x.toUpperCase())
 nums.map(x => x.toFixed())
 
-// Tuplas
+
+/**
+ * * Tuplas 
+ */
 // Pueden ser dos o más tipos de datos
 let tupla1: [number, string] = [1, 'chanchitoFeliz']
 let tupla2: [number, string[]] = [1, ['chanchitoFeliz', 'felipe']]
 let tupla3: [number, string, string] = [1, 'chanchitoFeliz', 'felipe']
 
-// ENUM
+
+/**
+ * * ENUM 
+ */
 // Lista de constantes que pueden ser referenciada en un futuro
 
 // Solución sin ENUM
@@ -84,7 +93,10 @@ const enum LoadingState { Idle, Loading, Success, Error }
 
 const estado = LoadingState.Success
 
-// Objetos
+
+/**
+ * * Objetos 
+ */
 type Direccion = {
     numero: number,
     calle: string, 
@@ -114,7 +126,10 @@ const arr: Persona[] = [ objeto ]
 // objeto.id = 42 // No puedes cambiar el valor
 objeto.nombre = 'Gandy Esaú Ávila Estrada'
 
-// Funciones
+
+/**
+ * * Funciones 
+ */
 const fn: (a: number, msg?: string) => string = (edad: number, msg: string = 'Eres mayor de edad') => {
     if (edad > 17)
         return `Puedes ingresar - ${msg}`
@@ -131,15 +146,20 @@ function validaEdad(edad: number, msg:string = 'Eres mayor de edad'): string
 console.log(validaEdad(18, 'Este es un mensaje personalizado'))
 console.log(fn(18))
 
-// Tipo Never
-// Se usa principalmente en funciones donde es posible que nunca vaya a retornar algo
-// Se usan principalmente en funciones que se dedican a solo lanzar excepciones. 
+
+/**
+ * * Tipo Never 
+ */
+// Se usa principalmente en funciones donde es posible que nunca vaya a retornar algo, como por ejemplo, funciones que solo se dedican a lanzar excepciones.
 
 function ErrorUsuario(): never {
     throw new Error('Error de un usuario')
 }
 
-// Union Type
+
+/**
+ * * Union Type 
+ */
 // Es posible definir una variable con 2 o más tipos de datos sin hacer uso del tipo any
 let puntaje: number | string = 98
 
@@ -168,8 +188,10 @@ function sumaDos(n: number | string): number {
 console.log(sumaDos(2))
 console.log(sumaDos('2'))
 
-// Intersection type
 
+/**
+ * * Intersection type 
+ */
 type Audit = {
     created_at: string,
     modified_at: string
@@ -186,7 +208,10 @@ const product: Audit & Product = {
     modified_at: '2023/04/30'
 }
 
-// Literal type
+
+/**
+ * * Literal type 
+ */
 // Le indicas a la variable cuáles son los valores que puedes asignar, pueden ser uno o varios.
 
 // Para el siguiente ejemplo, no es posible asignar números diferentes a 0, 1, 2, 3, 5
@@ -198,7 +223,10 @@ const nDeFibo1: 0 | 1 | 2 | 3 | 5 = 3
 type Fibo = 0 | 1 | 2 | 3 | 5
 const nDeFibo2: Fibo = 5
 
-// Nullable types
+
+/**
+ * * Nullable types 
+ */
 // Con el union type, es posible recibir núlos, pero tendran que ser verificados con sentencias de control para saber que hacer cuando lleguen esos tipos de datos. 
 function toNumber(s: string | null | undefined) 
 {
@@ -209,8 +237,10 @@ function toNumber(s: string | null | undefined)
 
 const n = toNumber(null)
 
-// Optional chain operator
 
+/**
+ * * Optional chain operator 
+ */
 function getUser(id: number)
 {
     if (id < 0)
@@ -237,7 +267,9 @@ const fn1: any = null
 fn1?.()
 
 
-// Nullish coalescing operator
+/**
+ * * Nullish coalescing operator 
+ */
 // Con la operación ?? también considera los strings vaciós y los 0
 
 const difficulty: number | null = null
@@ -249,7 +281,9 @@ const user2 = {
 console.log(user2)
 
 
-// Type assertion 
+/**
+ * * Type assertion 
+ */
 // Existen algunos atributos que ts no sabe que tipo de dato son, entonces gracias al type assertion, será posible decirle que tipo de dato es un valor
 // El uso de type assertion puede ser peligroso, entonces solo hay que estar 100% seguro de que ese valor es un tipo de dato 
 
@@ -266,7 +300,9 @@ console.log(input1?.value)
 const input2 = <HTMLInputElement> document?.getElementById('password')
 
 
-// Type narrowing
+/**
+ * * Type narrowing
+ */
 // Gracias al union type, es posible tener una variable con dos posibles valores, entonces, gracias al type narrowing podemos llevar a la variable a un camino en específico. 
 
 function lala(x: string | number) {
@@ -283,7 +319,9 @@ function lala(x: string | number) {
 }
 
 
-// Type unknown
+/**
+ * * Type unknown
+ */
 // Con el tipo de dato unknown, nos va a obligar a manejar los posibles caminos que pueda tener dependiendo el tipo de dato
 // Es una mejora del tipo any
 function procesa(algo: unknown)
